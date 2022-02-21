@@ -9,10 +9,21 @@ test () {
   input=$2
   rest=("${args[@]:2}")
   echo "run '$input'"
-  res=$(wat2wasm $2 --output=a.wat && deno run --allow-read index.ts ${rest[@]})
+  res=$(wat2wasm $2 --output=a.wasm && deno run --allow-read index.ts ${rest[@]})
   if [ "$res" -ne "$1" ] ; then
-  echo "${RED}failed! '$2', expected: '$expected', actual: '$res'${NC}"
-  exit 1;
+    echo "${RED}failed! '$2', expected: '$expected', actual: '$res'${NC}"
+    exit 1;
+  fi
+}
+
+test_importjs () {
+  arg=$1
+  input="./importjs.wat"
+  echo "run '$input'"
+  res=$(wat2wasm $input --output=a.wasm && deno run --allow-read importjs.ts ${arg})
+  if [ $res = "$arg" ] ; then
+    echo "${RED}failed! 'input', expected: '42', actual: '$res'${NC}"
+    exit 1;
   fi
 }
 
@@ -29,5 +40,8 @@ test 0 ./stackmachine.wat -1 1
 test -3 ./stackmachine.wat -1 -2
 
 test 3 ./multimodule.wat 1 2
+
+test_importjs 42
+test_importjs Hello
 
 echo "done!"
