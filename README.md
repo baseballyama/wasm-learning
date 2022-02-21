@@ -9,3 +9,7 @@ brew install cmake ninja wabt deno
 ```
 sh test.sh
 ```
+
+## Inputs
+
+https://developer.mozilla.org/ja/docs/WebAssembly/Understanding_the_text_format
