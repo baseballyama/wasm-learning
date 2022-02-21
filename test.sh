@@ -28,4 +28,6 @@ test -1 ./stackmachine.wat -1 0
 test 0 ./stackmachine.wat -1 1
 test -3 ./stackmachine.wat -1 -2
 
+test 3 ./multimodule.wat 1 2
+
 echo "done!"
