@@ -1,2 +1,11 @@
-# wasm-learning
-Write wat file and run on Deno
+## Environment Setting (Mac)
+
+```
+brew install cmake ninja wabt deno
+```
+
+## Run Tests
+
+```
+sh test.sh
+```
